@@ -1,0 +1,8 @@
+{
+  "name": "المهل للنقليات",
+  "description": "موقع شركة المهل للنقليات وخدمات النقل في مكة المكرمة",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
