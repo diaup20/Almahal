@@ -1,4 +1,5 @@
 import { Phone, MapPin, Mail } from 'lucide-react';
+import logoImg from '../../assets/logo.png';
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
           {/* Brand & Logo */}
           <div className="flex flex-col md:flex-row items-center gap-4">
             <img 
-              src="/logo.png" 
+              src={logoImg} 
               alt="المهل للنقليات" 
               referrerPolicy="no-referrer"
               className="h-14 w-14 md:h-16 md:w-16 object-cover rounded-xl border border-amber-500/30 shadow-lg" 

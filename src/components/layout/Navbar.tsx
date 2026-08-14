@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Truck, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import logoImg from '../../assets/logo.png';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,7 +35,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl flex items-center justify-between w-full">
         <Link to="/" className="flex items-center gap-3 z-50">
           <img 
-            src="/logo.png" 
+            src={logoImg} 
             alt="المهل للنقليات" 
             referrerPolicy="no-referrer"
             className={cn(
