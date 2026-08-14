@@ -11,7 +11,8 @@ export default function Footer() {
             <img 
               src="/logo.png" 
               alt="المهل للنقليات" 
-              className="h-20 w-20 md:h-16 md:w-16 object-contain rounded-full border border-amber-500/20 shadow-md" 
+              referrerPolicy="no-referrer"
+              className="h-14 w-14 md:h-16 md:w-16 object-cover rounded-xl border border-amber-500/30 shadow-lg" 
             />
             <div>
               <h2 className="text-2xl md:text-xl font-bold text-white tracking-tight mb-1">المهل للنقليات</h2>

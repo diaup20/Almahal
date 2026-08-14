@@ -13,11 +13,14 @@ import AdminServices from './pages/admin/AdminServices';
 import AdminMessages from './pages/admin/AdminMessages';
 import AdminGallery from './pages/admin/AdminGallery';
 import AdminSettings from './pages/admin/AdminSettings';
+import AdminSEO from './pages/admin/AdminSEO';
+import AnalyticsTracker from './components/AnalyticsTracker';
 
 export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -27,6 +30,7 @@ export default function App() {
             <Route path="messages" element={<AdminMessages />} />
             <Route path="gallery" element={<AdminGallery />} />
             <Route path="settings" element={<AdminSettings />} />
+            <Route path="seo" element={<AdminSEO />} />
           </Route>
         </Routes>
       </BrowserRouter>

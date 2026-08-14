@@ -36,9 +36,10 @@ export default function Navbar() {
           <img 
             src="/logo.png" 
             alt="المهل للنقليات" 
+            referrerPolicy="no-referrer"
             className={cn(
-              "object-contain rounded-full border border-amber-500/20 shadow-md transition-all duration-300",
-              isScrolled ? "h-10 w-10 md:h-12 md:w-12" : "h-12 w-12 md:h-16 md:w-16"
+              "object-cover rounded-xl border border-amber-500/30 shadow-lg transition-all duration-300",
+              isScrolled ? "h-11 w-11 md:h-12 md:w-12" : "h-12 w-12 md:h-14 md:w-14"
             )}
             onError={(e) => {
               (e.target as HTMLImageElement).style.display = 'none';

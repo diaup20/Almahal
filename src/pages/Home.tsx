@@ -1,4 +1,7 @@
 import { Helmet } from 'react-helmet-async';
+import { useState, useEffect } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 import Navbar from '@/components/layout/Navbar';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
@@ -10,12 +13,42 @@ import Footer from '@/components/layout/Footer';
 import FloatingButtons from '@/components/layout/FloatingButtons';
 
 export default function Home() {
+  const [seo, setSeo] = useState({
+    title: 'المهل للنقليات وخدمات النقل في مكة | نقل معدات، بركسات، وحديد',
+    description: 'شركة المهل للنقليات في مكة المكرمة. نقدم حلول نقل احترافية وآمنة للأحمال، المعدات، البركسات، والحديد بأحدث الشاحنات. اتصل بنا الآن.',
+    keywords: 'نقليات مكة, نقل بركسات مكة, نقل حديد مكة, نقل معدات, نقل أحمال كبيرة, شركة نقل مكة',
+    canonicalUrl: '',
+    ogTitle: '',
+    ogDescription: '',
+    ogImage: '',
+  });
+
+  useEffect(() => {
+    const fetchSEO = async () => {
+      try {
+        const docRef = doc(db, 'settings', 'seo');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setSeo({ ...seo, ...docSnap.data() } as any);
+        }
+      } catch (error) {
+        console.error("Error fetching SEO:", error);
+      }
+    };
+    fetchSEO();
+  }, []);
+
   return (
     <>
       <Helmet>
-        <title>المهل للنقليات وخدمات النقل في مكة | نقل معدات، بركسات، وحديد</title>
-        <meta name="description" content="شركة المهل للنقليات في مكة المكرمة. نقدم حلول نقل احترافية وآمنة للأحمال، المعدات، البركسات، والحديد بأحدث الشاحنات. اتصل بنا الآن." />
-        <meta name="keywords" content="نقليات مكة, نقل بركسات مكة, نقل حديد مكة, نقل معدات, نقل أحمال كبيرة, شركة نقل مكة" />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta name="keywords" content={seo.keywords} />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
+        {seo.ogTitle && <meta property="og:title" content={seo.ogTitle} />}
+        {seo.ogDescription && <meta property="og:description" content={seo.ogDescription} />}
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:type" content="website" />
       </Helmet>
       <div className="font-sans antialiased text-slate-900 min-h-screen" dir="rtl">
         <Navbar />

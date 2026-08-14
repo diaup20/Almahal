@@ -2,7 +2,7 @@ import { Outlet, Navigate, Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { auth } from '@/lib/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { LayoutDashboard, MessageSquare, Briefcase, Image as ImageIcon, LogOut, Loader2, Home, Settings } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Briefcase, Image as ImageIcon, LogOut, Loader2, Home, Settings, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function AdminLayout() {
@@ -39,6 +39,7 @@ export default function AdminLayout() {
     { name: 'الخدمات', path: '/admin/services', icon: Briefcase },
     { name: 'المعرض', path: '/admin/gallery', icon: ImageIcon },
     { name: 'الرسائل', path: '/admin/messages', icon: MessageSquare },
+    { name: 'محركات البحث (SEO)', path: '/admin/seo', icon: Search },
     { name: 'الإعدادات', path: '/admin/settings', icon: Settings },
   ];
 
