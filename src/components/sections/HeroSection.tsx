@@ -1,4 +1,5 @@
 import { ArrowLeft, MessageCircle } from 'lucide-react';
+import logoImg from '../../assets/logo.png';
 
 export default function HeroSection() {
   return (
@@ -7,9 +8,13 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-slate-800" style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, #1e293b 0%, #0f172a 100%)', opacity: 0.8 }} />
       <div className="absolute inset-0 bg-gradient-to-l from-slate-900/20 via-slate-900/60 to-slate-900 z-10" />
       
-      {/* Background Graphic */}
-      <div className="hidden lg:flex absolute left-20 top-1/2 -translate-y-1/2 w-[400px] h-[250px] bg-slate-700/30 rounded-2xl border border-slate-500/30 z-0 items-center justify-center">
-         <div className="text-slate-500 italic text-6xl opacity-20 transform -rotate-12">AL MAHAL</div>
+      {/* Background Official Logo Graphic */}
+      <div className="hidden lg:flex absolute left-12 xl:left-24 top-1/2 -translate-y-1/2 w-[420px] h-[420px] z-0 items-center justify-center opacity-30 hover:opacity-50 transition-opacity duration-500">
+         <img 
+           src={logoImg} 
+           alt="المهل للنقليات" 
+           className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(245,158,11,0.3)]"
+         />
       </div>
 
       <div className="container mx-auto px-4 md:px-10 max-w-7xl relative z-20">
