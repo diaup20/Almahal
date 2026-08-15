@@ -12,6 +12,8 @@ export default function AdminMessages() {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setMessages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       setLoading(false);
+    }, () => {
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);

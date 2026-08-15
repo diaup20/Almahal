@@ -25,6 +25,8 @@ export default function AdminServices() {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setServices(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       setLoading(false);
+    }, () => {
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);

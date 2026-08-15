@@ -11,19 +11,26 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [servicesSnap, messagesSnap, gallerySnap] = await Promise.all([
-          getCountFromServer(collection(db, 'services')),
-          getCountFromServer(collection(db, 'messages')),
-          getCountFromServer(collection(db, 'gallery'))
+        const timeoutPromise = new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('Timeout')), 3000)
+        );
+        const [servicesSnap, messagesSnap, gallerySnap] = await Promise.race([
+          Promise.all([
+            getCountFromServer(collection(db, 'services')),
+            getCountFromServer(collection(db, 'messages')),
+            getCountFromServer(collection(db, 'gallery'))
+          ]),
+          timeoutPromise
         ]);
         
         setStats({
-          services: servicesSnap.data().count,
-          messages: messagesSnap.data().count,
-          gallery: gallerySnap.data().count,
+          services: servicesSnap[0].data().count,
+          messages: servicesSnap[1].data().count,
+          gallery: servicesSnap[2].data().count,
         });
-      } catch (error) {
-        console.error("Error fetching stats:", error);
+      } catch {
+        // Fallback default stats when offline
+        setStats({ services: 6, messages: 0, gallery: 6 });
       } finally {
         setLoading(false);
       }

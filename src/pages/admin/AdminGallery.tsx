@@ -14,6 +14,8 @@ export default function AdminGallery() {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setImages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       setLoading(false);
+    }, () => {
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
