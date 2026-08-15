@@ -39,8 +39,8 @@ export default function Navbar() {
             alt="المهل للنقليات" 
             referrerPolicy="no-referrer"
             className={cn(
-              "object-cover rounded-xl border border-amber-500/30 shadow-lg transition-all duration-300",
-              isScrolled ? "h-11 w-11 md:h-12 md:w-12" : "h-12 w-12 md:h-14 md:w-14"
+              "w-auto object-contain rounded-lg border border-amber-500/40 shadow-md transition-all duration-300 bg-slate-950/80 p-0.5",
+              isScrolled ? "h-10 md:h-11" : "h-12 md:h-14"
             )}
             onError={(e) => {
               (e.target as HTMLImageElement).style.display = 'none';

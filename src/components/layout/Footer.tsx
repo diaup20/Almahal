@@ -13,7 +13,7 @@ export default function Footer() {
               src={logoImg} 
               alt="المهل للنقليات" 
               referrerPolicy="no-referrer"
-              className="h-14 w-14 md:h-16 md:w-16 object-cover rounded-xl border border-amber-500/30 shadow-lg" 
+              className="h-16 md:h-20 w-auto object-contain rounded-xl border border-amber-500/30 shadow-lg bg-slate-950/80 p-1" 
             />
             <div>
               <h2 className="text-2xl md:text-xl font-bold text-white tracking-tight mb-1">المهل للنقليات</h2>
