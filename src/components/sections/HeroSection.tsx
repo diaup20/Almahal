@@ -11,9 +11,15 @@ export default function HeroSection() {
       {/* Background Official Logo Graphic */}
       <div className="hidden lg:flex absolute left-12 xl:left-24 top-1/2 -translate-y-1/2 w-[420px] h-[420px] z-0 items-center justify-center opacity-30 hover:opacity-50 transition-opacity duration-500">
          <img 
-           src={logoImg} 
+           src={logoImg || '/logo.png'} 
            alt="المهل للنقليات" 
            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(245,158,11,0.3)]"
+           onError={(e) => {
+             const img = e.target as HTMLImageElement;
+             if (img.src !== window.location.origin + '/logo.png') {
+               img.src = '/logo.png';
+             }
+           }}
          />
       </div>
 

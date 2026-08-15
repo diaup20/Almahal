@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { doc, setDoc } from 'firebase/firestore';
+import { db, safeGetDoc } from '@/lib/firebase';
 import { Loader2, Save, Globe, Type, AlignLeft, Search, Link as LinkIcon, Share2, Image as ImageIcon } from 'lucide-react';
 
 export default function AdminSEO() {
@@ -23,12 +23,12 @@ export default function AdminSEO() {
     const fetchSEO = async () => {
       try {
         const docRef = doc(db, 'settings', 'seo');
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setFormData({ ...formData, ...docSnap.data() } as any);
+        const docSnap = await safeGetDoc(docRef);
+        if (docSnap && docSnap.exists()) {
+          setFormData(prev => ({ ...prev, ...docSnap.data() }));
         }
-      } catch (error) {
-        console.error("Error fetching SEO settings:", error);
+      } catch {
+        // Keep defaults
       } finally {
         setLoading(false);
       }

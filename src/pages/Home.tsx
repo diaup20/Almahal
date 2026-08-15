@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { doc } from 'firebase/firestore';
+import { db, safeGetDoc } from '@/lib/firebase';
 import Navbar from '@/components/layout/Navbar';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
@@ -27,12 +27,12 @@ export default function Home() {
     const fetchSEO = async () => {
       try {
         const docRef = doc(db, 'settings', 'seo');
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setSeo({ ...seo, ...docSnap.data() } as any);
+        const docSnap = await safeGetDoc(docRef);
+        if (docSnap && docSnap.exists()) {
+          setSeo(prev => ({ ...prev, ...docSnap.data() }));
         }
-      } catch (error) {
-        console.error("Error fetching SEO:", error);
+      } catch {
+        // Fallback default SEO is already set
       }
     };
     fetchSEO();

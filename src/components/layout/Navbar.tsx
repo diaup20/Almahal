@@ -35,7 +35,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl flex items-center justify-between w-full">
         <Link to="/" className="flex items-center gap-3 z-50">
           <img 
-            src={logoImg} 
+            src={logoImg || '/logo.png'} 
             alt="المهل للنقليات" 
             referrerPolicy="no-referrer"
             className={cn(
@@ -43,8 +43,13 @@ export default function Navbar() {
               isScrolled ? "h-10 md:h-11" : "h-12 md:h-14"
             )}
             onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none';
-              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+              const img = e.target as HTMLImageElement;
+              if (img.src !== window.location.origin + '/logo.png') {
+                img.src = '/logo.png';
+              } else {
+                img.style.display = 'none';
+                img.nextElementSibling?.classList.remove('hidden');
+              }
             }}
           />
           <div className="hidden w-10 h-10 bg-amber-500 rounded flex items-center justify-center text-slate-900 font-bold text-xl">

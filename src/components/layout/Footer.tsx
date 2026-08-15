@@ -10,10 +10,16 @@ export default function Footer() {
           {/* Brand & Logo */}
           <div className="flex flex-col md:flex-row items-center gap-4">
             <img 
-              src={logoImg} 
+              src={logoImg || '/logo.png'} 
               alt="المهل للنقليات" 
               referrerPolicy="no-referrer"
               className="h-16 md:h-20 w-auto object-contain rounded-xl border border-amber-500/30 shadow-lg bg-slate-950/80 p-1" 
+              onError={(e) => {
+                const img = e.target as HTMLImageElement;
+                if (img.src !== window.location.origin + '/logo.png') {
+                  img.src = '/logo.png';
+                }
+              }}
             />
             <div>
               <h2 className="text-2xl md:text-xl font-bold text-white tracking-tight mb-1">المهل للنقليات</h2>

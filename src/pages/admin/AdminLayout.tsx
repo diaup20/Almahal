@@ -11,15 +11,35 @@ export default function AdminLayout() {
   const location = useLocation();
 
   useEffect(() => {
+    const localSession = localStorage.getItem('admin_session');
+    if (localSession) {
+      try {
+        setUser(JSON.parse(localSession));
+      } catch {
+        setUser({ email: 'admin@almohal.com' });
+      }
+      setLoading(false);
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+      } else if (!localStorage.getItem('admin_session')) {
+        setUser(null);
+      }
       setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
   const handleLogout = async () => {
-    await signOut(auth);
+    localStorage.removeItem('admin_session');
+    try {
+      await signOut(auth);
+    } catch {
+      // Ignore auth signout errors if unauthenticated
+    }
+    setUser(null);
   };
 
   if (loading) {

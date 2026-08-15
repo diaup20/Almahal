@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { collection, query, orderBy } from 'firebase/firestore';
+import { db, safeGetDocs } from '@/lib/firebase';
 import { ArrowLeft, Box, Settings, Zap, Wind, Truck, PackageOpen } from 'lucide-react';
 
 interface Service {
@@ -39,16 +39,16 @@ export default function ServicesSection() {
     const fetchServices = async () => {
       try {
         const q = query(collection(db, 'services'), orderBy('order', 'asc'));
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
+        const querySnapshot = await safeGetDocs(q);
+        if (querySnapshot && !querySnapshot.empty) {
           const fetchedServices = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
           })) as Service[];
           setServices(fetchedServices);
         }
-      } catch (error) {
-        console.error("Error fetching services:", error);
+      } catch {
+        // Keep defaultServices when offline or Firestore backend is unreachable
       } finally {
         setLoading(false);
       }

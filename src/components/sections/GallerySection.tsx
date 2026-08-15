@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { collection, query, orderBy } from 'firebase/firestore';
+import { db, safeGetDocs } from '@/lib/firebase';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
@@ -29,16 +29,16 @@ export default function GallerySection() {
     const fetchGallery = async () => {
       try {
         const q = query(collection(db, 'gallery'), orderBy('order', 'asc'));
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
+        const querySnapshot = await safeGetDocs(q);
+        if (querySnapshot && !querySnapshot.empty) {
           const fetchedImages = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
           })) as GalleryImage[];
           setImages(fetchedImages);
         }
-      } catch (error) {
-        console.error("Error fetching gallery:", error);
+      } catch {
+        // Keep default gallery images when offline
       } finally {
         setLoading(false);
       }

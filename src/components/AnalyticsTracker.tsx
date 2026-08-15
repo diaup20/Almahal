@@ -16,8 +16,8 @@ export default function AnalyticsTracker() {
             page_title: document.title,
           });
         }
-      } catch (error) {
-        console.error("Error logging page view:", error);
+      } catch {
+        // Silently catch analytics failures when offline or unconfigured
       }
     };
 
