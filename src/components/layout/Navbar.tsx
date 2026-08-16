@@ -22,6 +22,7 @@ export default function Navbar() {
     { name: 'نبذة عنا', path: '/#about' },
     { name: 'الخدمات', path: '/#services' },
     { name: 'المعرض', path: '/#gallery' },
+    { name: 'الموقع', path: '/#location' },
     { name: 'تواصل معنا', path: '/#contact' },
   ];
 

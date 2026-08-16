@@ -7,6 +7,7 @@ import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import GallerySection from '@/components/sections/GallerySection';
+import LocationMapSection from '@/components/sections/LocationMapSection';
 import WhyUsSection from '@/components/sections/WhyUsSection';
 import ContactSection from '@/components/sections/ContactSection';
 import Footer from '@/components/layout/Footer';
@@ -58,6 +59,7 @@ export default function Home() {
           <ServicesSection />
           <WhyUsSection />
           <GallerySection />
+          <LocationMapSection />
           <ContactSection />
         </main>
         <Footer />
